@@ -101,16 +101,16 @@ public class TeacherDao {
 
     /**
      * 根据id查找老师对象信息
-     * @param id
+     * @param name
      * @return Teacher
      * @throws SQLException
      */
-    public Teacher get(Integer id) throws SQLException {
+    public Teacher get(String name) throws SQLException {
         Connection conn = JdbcUtil.getConnection();
         String sql = "" +
-                "select * from teachers where id = ?";
+                "select * from teachers where name = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setInt(1,id);
+        preparedStatement.setString(1,name);
         ResultSet resultSet = preparedStatement.executeQuery();
         Teacher teacher = null;
         while(resultSet.next()){

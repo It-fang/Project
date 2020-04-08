@@ -104,16 +104,16 @@ public class StudentDao {
 
     /**
      * 根据id查找学生对象信息
-     * @param id
+     * @param number
      * @return Student
      * @throws SQLException
      */
-    public Student get(Integer id) throws SQLException {
+    public Student get(String number) throws SQLException {
         Connection conn = JdbcUtil.getConnection();
         String sql = "" +
-                "select * from students where id = ?";
+                "select * from students where number = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setInt(1,id);
+        preparedStatement.setString(1,number);
         ResultSet resultSet = preparedStatement.executeQuery();
         Student student = null;
         while(resultSet.next()){

@@ -95,16 +95,16 @@ public class TeacherUserDao {
 
     /**
      * 按照老师id来查询老师用户信息
-     * @param id
+     * @param username
      * @return
      * @throws SQLException
      */
-    public TeacherUser get(Integer id) throws SQLException {
+    public TeacherUser get(String username) throws SQLException {
         Connection conn = JdbcUtil.getConnection();
         String sql = "" +
-                "select * from teacheruser where id = ?";
+                "select * from teacheruser where username = ?";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setInt(1,id);
+        preparedStatement.setString(1,username);
         ResultSet resultSet = preparedStatement.executeQuery();
         TeacherUser teacherUser = null;
         while(resultSet.next()){
@@ -112,8 +112,7 @@ public class TeacherUserDao {
             teacherUser.setId(resultSet.getInt("id"));
             teacherUser.setUsername(resultSet.getString("username"));
             teacherUser.setPassword(resultSet.getString("password"));
-            teacherUser.setTeacherId(resultSet.getInt("id"));
-
+            teacherUser.setTeacherId(resultSet.getInt("teacher_id"));
         }
         return teacherUser;
     }
