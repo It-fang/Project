@@ -128,7 +128,6 @@ public class TeacherDao {
             teachers.add(teacher);
         }
         return teachers;
-
     }
 
     /**
