@@ -100,7 +100,39 @@ public class TeacherDao {
     }
 
     /**
-     * 根据id查找老师对象信息
+     * 根据用户输入的名字或学院查询教师
+     * @param term
+     * @return
+     * @throws SQLException
+     */
+    public List<Teacher> query(String term) throws SQLException {
+        Connection conn = JdbcUtil.getConnection();
+        String sql = "" +
+                "select * from teachers " +
+                "where college = ? or name like ? " +
+                "order by id";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1,term);
+        preparedStatement.setString(2,'%'+term+'%');
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Teacher> teachers = new ArrayList<Teacher>();
+        Teacher teacher = null;
+        while(resultSet.next()){
+            teacher = new Teacher();
+            teacher.setId(resultSet.getInt("id"));
+            teacher.setName(resultSet.getString("name"));
+            teacher.setCollege(resultSet.getString("college"));
+            teacher.setMajor(resultSet.getString("major"));
+            teacher.setClas(resultSet.getString("clas"));
+            teacher.setFreetime(resultSet.getTime("freetime"));
+            teachers.add(teacher);
+        }
+        return teachers;
+
+    }
+
+    /**
+     * 根据name查找老师对象信息
      * @param name
      * @return Teacher
      * @throws SQLException
