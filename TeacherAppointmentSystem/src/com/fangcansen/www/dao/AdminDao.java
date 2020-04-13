@@ -26,6 +26,7 @@ public class AdminDao {
         preparedStatement.setString(1,admin.getUsername());
         preparedStatement.setString(2,admin.getPassword());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -41,6 +42,7 @@ public class AdminDao {
         PreparedStatement preparedStatement =conn.prepareStatement(sql);
         preparedStatement.setString(1,username);
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -59,6 +61,7 @@ public class AdminDao {
         preparedStatement.setString(1,admin.getPassword());
         preparedStatement.setString(2,admin.getUsername());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -82,6 +85,7 @@ public class AdminDao {
             admin.setPassword(resultSet.getString("password"));
 
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return admin;
     }
 }

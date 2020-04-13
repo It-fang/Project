@@ -21,7 +21,7 @@ public class ApplicationDao {
         Connection conn = JdbcUtil.getConnection();
         String sql = "" +
                 "insert into application " +
-                "(teacher_id,teacher_name,student_name,student_number,applytime)   " +
+                "(teacher_id,teacher_name,student_name,student_number,applytime) " +
                 "value (?,?,?,?,?)";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setInt(1,application.getTeacherId());
@@ -30,6 +30,7 @@ public class ApplicationDao {
         preparedStatement.setString(4,application.getStudentNumber());
         preparedStatement.setString(5,application.getApplyTime());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -45,6 +46,7 @@ public class ApplicationDao {
         PreparedStatement preparedStatement =conn.prepareStatement(sql);
         preparedStatement.setInt(1,id);
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -63,5 +65,6 @@ public class ApplicationDao {
         preparedStatement.setString(1,application.getIfAgree());
         preparedStatement.setInt(2,application.getId());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 }

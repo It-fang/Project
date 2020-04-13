@@ -5,6 +5,7 @@ import com.fangcansen.www.po.*;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author it-fang
@@ -37,26 +38,33 @@ public class TeacherUserService {
      *
      * @param _currentPage
      * @param _rows
+     * @param condition
      * @return
      */
-    public Page<Teacher> findUserByPage(String _currentPage, String _rows) throws SQLException {
+    public Page<Teacher> findUserByPage(String _currentPage, String _rows, Map<String, String[]> condition) throws SQLException {
         //1,创建Page对象
         Page<Teacher> page = new Page<>();
         //2,设置参数
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);
+        if(currentPage <= 0){
+            currentPage = 1;
+        }
+        //3,调用Dao查询totalCount
+        int totalCount = PageDao.findTotalCount(condition);
+        page.setTotalCount(totalCount);
+        //4,计算总页码
+        int totalPage = totalCount % rows == 0 ? totalCount/rows : totalCount/rows + 1;
+        if (currentPage >= totalPage){
+            currentPage = totalPage;
+        }
         page.setCurrentPage(currentPage);
         page.setRows(rows);
-        //3,调用Dao查询totalCount
-        int totalCount = PageDao.findTotalCount();
-        page.setTotalCount(totalCount);
-        //4,调用Dao查询List集合
-        int start = (currentPage - 1)*rows;
-        List<Teacher> list =  PageDao.findByPage(start,rows);
-        page.setList(list);
-        //5,计算总页码
-        int totalPage = totalCount % rows == 0 ? totalCount/rows : totalCount/rows + 1;
         page.setTotalPage(totalPage);
+        //5,调用Dao查询List集合
+        int start = (currentPage - 1)*rows;
+        List<Teacher> list =  PageDao.findByPage(start,rows,condition);
+        page.setList(list);
         return page;
     }
 }

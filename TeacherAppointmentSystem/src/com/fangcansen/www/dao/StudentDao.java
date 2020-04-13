@@ -33,6 +33,7 @@ public class StudentDao {
         preparedStatement.setString(5,student.getMajor());
         preparedStatement.setString(6,student.getClas());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -48,6 +49,7 @@ public class StudentDao {
         PreparedStatement preparedStatement =conn.prepareStatement(sql);
         preparedStatement.setInt(1,id);
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -71,6 +73,7 @@ public class StudentDao {
         preparedStatement.setString(6,student.getClas());
         preparedStatement.setInt(7,student.getId());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -99,6 +102,7 @@ public class StudentDao {
 
             students.add(student);
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return students;
     }
 
@@ -126,6 +130,7 @@ public class StudentDao {
             student.setMajor(resultSet.getString("major"));
             student.setClas(resultSet.getString("clas"));
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return student;
     }
 

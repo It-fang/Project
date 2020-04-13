@@ -31,26 +31,29 @@
 <body>
 <div class="container">
     <h3><p class="text-center">教师信息列表</p></h3>
-    <form class="form-inline" action="/TeacherAppointmentSystem_war_exploded/queryTeacherServlet" method="post">
+    <form class="form-inline" action="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet" method="post">
         <div class="form-group">
             <label for="name">姓名</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="请输入教师名字">
+            <input type="text" class="form-control" id="name" name="name" value="${condition.name[0]}" placeholder="请输入教师的名字">
         </div>
         <div class="form-group">
             <label for="college">学院</label>
-            <input type="text" class="form-control" id="college" name="college" placeholder="请输入学院">
+            <input type="text" class="form-control" id="college" name="college" value="${condition.college[0]}" placeholder="请输入教师所属学院">
         </div>
         <input type="submit" class="btn btn-primary btn-sm" value="搜索 ">
+        <div style="float:right; margin: 5px;">
+            <a class="btn btn-lg btn-success" href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=1&rows=5" role="button">显示所有教师信息</a>
+        </div>
     </form>
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
             <th>id</th>
-            <th>name</th>
-            <th>college</th>
-            <th>major</th>
-            <th>class</th>
-            <th>freetime</th>
-            <th>appointment</th>
+            <th>教师姓名</th>
+            <th>所属学院</th>
+            <th>专业</th>
+            <th>班级</th>
+            <th>空闲时间</th>
+            <th>预约教师</th>
         </tr>
         <c:forEach items="${page.list}" var="teacher" varStatus="s">
             <tr>
@@ -67,21 +70,45 @@
     <div>
         <nav aria-label="Page navigation">
             <ul class="pagination pagination-lg">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
+                <c:if test="${page.currentPage == 1}">
+                    <li class="disabled">
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${page.currentPage != 1}">
+                    <li>
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage - 1}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:forEach begin="1" end="${page.totalPage}" var="i">
+                    <c:if test="${page.currentPage == i}">
+                         <li class="active"><a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}">${i}</a></li>
+                    </c:if>
+                    <c:if test="${page.currentPage!= i}">
+                         <li><a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}">${i}</a></li>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${page.currentPage == page.totalPage}">
+                    <li class="disabled">
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${page.currentPage != page.totalPage}">
+                    <li>
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage + 1}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+                <span style="font-size: 30px;margin-left: 10px;">
+                    共${page.totalCount}条记录,共${page.totalPage}页
+                </span>
             </ul>
         </nav>
     </div>

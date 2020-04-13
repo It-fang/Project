@@ -41,8 +41,8 @@ public class TeacherLoginServlet extends HttpServlet {
         }
         //5,判断密码是否输入正确
         if(teacherUser.getPassword().equals(password)){
-            response.setContentType("text/html;charset=utf-8");
-            response.getWriter().write("登陆成功");
+            request.setAttribute("teacherUser",teacherUser);
+            request.getRequestDispatcher("/queryapplication.jsp").forward(request,response);
         }else {
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write("密码不正确，请重新输入");

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 @WebServlet(name = "queryTeacherByPageServlet",urlPatterns = "/queryTeacherByPageServlet")
 public class QueryTeacherByPageServlet extends HttpServlet {
@@ -21,16 +22,25 @@ public class QueryTeacherByPageServlet extends HttpServlet {
         //2,获取参数
         String currentPage = request.getParameter("currentPage");
         String rows = request.getParameter("rows");
+        if(currentPage == null || "".equals(currentPage)){
+            currentPage = "1";
+        }
+        if(rows == null || "".equals(rows)){
+            rows = "5";
+        }
+        //获取查询条件参数
+        Map<String, String[]> condition = request.getParameterMap();
         //3,调用service
         TeacherUserService teacherUserService = new TeacherUserService();
         Page<Teacher> page = null;
         try {
-            page = teacherUserService.findUserByPage(currentPage,rows);
+            page = teacherUserService.findUserByPage(currentPage,rows,condition);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         //4,将Page存入request域中
         request.setAttribute("page",page);
+        request.setAttribute("condition",condition);
         //5,转发Page到queryteacher.jsp
         request.getRequestDispatcher("/queryteacher.jsp").forward(request,response);
     }

@@ -32,6 +32,7 @@ public class TeacherUserDao {
         preparedStatement.setString(2,teacherUser.getPassword());
         preparedStatement.setInt(3,teacherUser.getTeacherId());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -47,6 +48,7 @@ public class TeacherUserDao {
         PreparedStatement preparedStatement =conn.prepareStatement(sql);
         preparedStatement.setInt(1,id);
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -66,6 +68,7 @@ public class TeacherUserDao {
         preparedStatement.setString(2,teacherUser.getPassword());
         preparedStatement.setInt(3,teacherUser.getTeacherId());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -90,6 +93,7 @@ public class TeacherUserDao {
             teacherUser.setTeacherId(resultSet.getInt("teacher_id"));
             teacherUsers.add(teacherUser);
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return teacherUsers;
     }
 
@@ -114,6 +118,7 @@ public class TeacherUserDao {
             teacherUser.setPassword(resultSet.getString("password"));
             teacherUser.setTeacherId(resultSet.getInt("teacher_id"));
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return teacherUser;
     }
 }

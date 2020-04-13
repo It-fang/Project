@@ -31,8 +31,9 @@ public class TeacherDao {
         preparedStatement.setString(2,teacher.getCollege());
         preparedStatement.setString(3,teacher.getMajor());
         preparedStatement.setString(4,teacher.getClas());
-        preparedStatement.setTime(5,teacher.getFreetime());
+        preparedStatement.setString(5,teacher.getFreetime());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -48,6 +49,7 @@ public class TeacherDao {
         PreparedStatement preparedStatement =conn.prepareStatement(sql);
         preparedStatement.setInt(1,id);
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -67,9 +69,10 @@ public class TeacherDao {
         preparedStatement.setString(2,teacher.getCollege());
         preparedStatement.setString(3,teacher.getMajor());
         preparedStatement.setString(4,teacher.getClas());
-        preparedStatement.setTime(5,teacher.getFreetime());
+        preparedStatement.setString(5,teacher.getFreetime());
         preparedStatement.setInt(6,teacher.getId());
         preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
     }
 
     /**
@@ -93,9 +96,10 @@ public class TeacherDao {
             teacher.setCollege(resultSet.getString("college"));
             teacher.setMajor(resultSet.getString("major"));
             teacher.setClas(resultSet.getString("clas"));
-            teacher.setFreetime(resultSet.getTime("freetime"));
+            teacher.setFreetime(resultSet.getString("freetime"));
             teachers.add(teacher);
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return teachers;
     }
 
@@ -124,9 +128,10 @@ public class TeacherDao {
             teacher.setCollege(resultSet.getString("college"));
             teacher.setMajor(resultSet.getString("major"));
             teacher.setClas(resultSet.getString("clas"));
-            teacher.setFreetime(resultSet.getTime("freetime"));
+            teacher.setFreetime(resultSet.getString("freetime"));
             teachers.add(teacher);
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return teachers;
     }
 
@@ -151,9 +156,9 @@ public class TeacherDao {
             teacher.setCollege(resultSet.getString("college"));
             teacher.setMajor(resultSet.getString("major"));
             teacher.setClas(resultSet.getString("clas"));
-            teacher.setFreetime(resultSet.getTime("freetime"));
+            teacher.setFreetime(resultSet.getString("freetime"));
         }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
         return teacher;
     }
-
 }

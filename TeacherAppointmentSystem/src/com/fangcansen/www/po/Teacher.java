@@ -1,7 +1,5 @@
 package com.fangcansen.www.po;
 
-import java.sql.Time;
-
 /**
  * @author it-fang
  */
@@ -11,7 +9,7 @@ public class Teacher {
     private String college;
     private String major;
     private String clas;
-    private Time freetime;
+    private String freetime;
 
     public int getId() {
         return id;
@@ -53,13 +51,13 @@ public class Teacher {
         this.clas = clas;
     }
 
-    public Time getFreetime() {
+    public String getFreetime() {
         return freetime;
     }
 
 
 
-    public void setFreetime(Time freetime) {
+    public void setFreetime(String freetime) {
         this.freetime = freetime;
     }
 

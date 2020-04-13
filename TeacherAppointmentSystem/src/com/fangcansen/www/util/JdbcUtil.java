@@ -4,8 +4,7 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 /**
@@ -43,5 +42,37 @@ public class JdbcUtil {
      */
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
+    }
+
+    /**
+     * 释放资源
+     * @param preparedStatement
+     * @param connection
+     */
+    public static void close(PreparedStatement preparedStatement, Connection connection){
+        close(null,preparedStatement,connection);
+    }
+    public static void close(ResultSet resultSet, PreparedStatement preparedStatement, Connection connection){
+        if (resultSet != null){
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null){
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (connection != null){
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
