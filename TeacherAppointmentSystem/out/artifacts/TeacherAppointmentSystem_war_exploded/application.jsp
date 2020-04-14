@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <form action="/TeacherAppointmentSystem_war_exploded/submitApplyServlet?teacherId=${teacherId}" method="post">
+    <form action="/TeacherAppointmentSystem_war_exploded/submitApplyServlet?teacherId=${teacherId}&studentId=${studentId}" method="post">
         <div class="form-group col-xl-3">
             <label for="teacherName">教师姓名</label>
             <input type="text" class="form-control" id="teacherName" value="${teacherName}" name="teacherName" placeholder="请输入教师的名字">

@@ -107,7 +107,7 @@ public class StudentDao {
     }
 
     /**
-     * 根据id查找学生对象信息
+     * 根据学号查找学生对象信息
      * @param number
      * @return Student
      * @throws SQLException

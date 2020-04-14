@@ -161,4 +161,31 @@ public class TeacherDao {
         JdbcUtil.close(resultSet,preparedStatement,conn);
         return teacher;
     }
+
+    /**
+     * 根据id查找老师对象信息
+     * @param id
+     * @return
+     */
+    public Teacher get(int id) throws SQLException {
+        Connection conn = JdbcUtil.getConnection();
+        String sql = "" +
+                "select * from teachers where id = ?";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        Teacher teacher = null;
+        while(resultSet.next()){
+            teacher = new Teacher();
+            teacher.setId(resultSet.getInt("id"));
+            teacher.setName(resultSet.getString("name"));
+            teacher.setCollege(resultSet.getString("college"));
+            teacher.setMajor(resultSet.getString("major"));
+            teacher.setClas(resultSet.getString("clas"));
+            teacher.setFreetime(resultSet.getString("freetime"));
+        }
+        JdbcUtil.close(resultSet,preparedStatement,conn);
+        return teacher;
+    }
+
 }

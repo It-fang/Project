@@ -33,7 +33,7 @@ public class PageDao {
         int n = 0;
         List<String> params = new ArrayList<String>();
         for(String key:keyset){
-            if ("currentPage".equals(key) || "rows".equals(key)){
+            if ("currentPage".equals(key) || "rows".equals(key) || "studentId".equals(key)){
                 continue;
             }
             String value = condition.get(key)[0];
@@ -83,7 +83,7 @@ public class PageDao {
         int n = 0;
         List<String> params = new ArrayList<String>();
         for(String key:keyset){
-            if ("currentPage".equals(key) || "rows".equals(key)){
+            if ("currentPage".equals(key) || "rows".equals(key) || "studentId".equals(key)){
                 continue;
             }
             String value = condition.get(key)[0];

@@ -7,10 +7,19 @@ public class Application {
     private int id;
     private int teacherId;
     private String teacherName;
+    private int studentId;
     private String studentName;
     private String studentNumber;
     private String applyTime;
     private String ifAgree;
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
 
     public String getStudentNumber() {
         return studentNumber;
@@ -75,9 +84,10 @@ public class Application {
                 "id=" + id +
                 ", teacherId=" + teacherId +
                 ", teacherName='" + teacherName + '\'' +
+                ", studentId='" + studentId + '\'' +
                 ", studentName='" + studentName + '\'' +
                 ", studentNumber='" + studentNumber + '\'' +
-                ", applyTime=" + applyTime +
+                ", applyTime='" + applyTime + '\'' +
                 ", ifAgree='" + ifAgree + '\'' +
                 '}';
     }

@@ -1,6 +1,8 @@
 package com.fangcansen.www.view;
 
 import com.fangcansen.www.po.Page;
+import com.fangcansen.www.po.Student;
+import com.fangcansen.www.po.StudentUser;
 import com.fangcansen.www.po.Teacher;
 import com.fangcansen.www.service.TeacherUserService;
 
@@ -22,6 +24,8 @@ public class QueryTeacherByPageServlet extends HttpServlet {
         //2,获取参数
         String currentPage = request.getParameter("currentPage");
         String rows = request.getParameter("rows");
+        String _studentId = request.getParameter("studentId");
+        int studentId = Integer.parseInt(_studentId);
         if(currentPage == null || "".equals(currentPage)){
             currentPage = "1";
         }
@@ -38,9 +42,13 @@ public class QueryTeacherByPageServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //4,封装studentUser对象
+        StudentUser studentUser = new StudentUser();
+        studentUser.setStudentId(studentId);
         //4,将Page存入request域中
         request.setAttribute("page",page);
         request.setAttribute("condition",condition);
+        request.setAttribute("studentUser",studentUser);
         //5,转发Page到queryteacher.jsp
         request.getRequestDispatcher("/queryteacher.jsp").forward(request,response);
     }

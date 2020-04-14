@@ -28,29 +28,41 @@
     </style>
 </head>
 <body>
+
 <div class="container">
+    <h3><p class="text-center">学生预约申请列表</p></h3>
+    <div style="float:left; margin: 10px;">
+        <a class="btn btn-primary" href="/TeacherAppointmentSystem_war_exploded/modifyServlet?id=${teacherUser.teacherId}" role="button">修改自己信息</a>
+    </div>
+    <div style="float:right; margin: 5px;">
+        <a class="btn btn-lg btn-success" href="/TeacherAppointmentSystem_war_exploded/queryApplicationServlet?id=${teacherUser.teacherId}" role="button">显示所有预约申请</a>
+    </div>
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
-            <th>id</th>
-            <th>name</th>
-            <th>number</th>
-            <th>major</th>
-            <th>class</th>
-            <th>freetime</th>
-            <th>appointment</th>
+            <th>编号</th>
+            <th>学生姓名</th>
+            <th>学生学号</th>
+            <th>申请时间</th>
+            <th>是否同意</th>
+            <th>操作</th>
         </tr>
-        <c:forEach items="${page.list}" var="teacher" varStatus="s">
+        <c:forEach items="${applications}" var="application" varStatus="s">
             <tr>
                 <td>${s.count}</td>
-                <td>${teacher.name}</td>
-                <td>${teacher.college}</td>
-                <td>${teacher.major}</td>
-                <td>${teacher.clas}</td>
-                <td>${teacher.freetime}</td>
-                <td><a href="/TeacherAppointmentSystem_war_exploded/applicationServlet?id=${teacher.id}&name=${teacher.name}" class="btn btn-primary btn-sm active" role="button">预约</a></td>
+                <td>${application.studentName}</td>
+                <td>${application.studentNumber}</td>
+                <td>${application.applyTime}</td>
+                <td>${application.ifAgree}</td>
+                <td>
+                    <p>
+                        <a href="/TeacherAppointmentSystem_war_exploded/showServlet?id=${application.teacherId}&number=${application.studentNumber}" class="btn btn-primary btn-xs active" role="button">审批</a>
+                        <a href="/TeacherAppointmentSystem_war_exploded/deleteApplicationServlet?id=${application.teacherId}&number=${application.studentNumber}" class="btn btn-primary btn-xs active" role="button">删除</a>
+                    </p>
+                </td>
             </tr>
         </c:forEach>
     </table>
+
 </div>
 </body>
 </html>

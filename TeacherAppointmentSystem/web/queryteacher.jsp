@@ -31,7 +31,7 @@
 <body>
 <div class="container">
     <h3><p class="text-center">教师信息列表</p></h3>
-    <form class="form-inline" action="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet" method="post">
+    <form class="form-inline" action="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?studentId=${studentUser.studentId}" method="post">
         <div class="form-group">
             <label for="name">姓名</label>
             <input type="text" class="form-control" id="name" name="name" value="${condition.name[0]}" placeholder="请输入教师的名字">
@@ -42,12 +42,15 @@
         </div>
         <input type="submit" class="btn btn-primary btn-sm" value="搜索 ">
         <div style="float:right; margin: 5px;">
-            <a class="btn btn-lg btn-success" href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=1&rows=5" role="button">显示所有教师信息</a>
+            <a class="btn btn-success" href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=1&rows=5&studentId=${studentUser.studentId}" role="button">显示所有教师信息</a>
+        </div>
+        <div style="float:right; margin: 5px;">
+            <a class="btn  btn-success" href="/TeacherAppointmentSystem_war_exploded/queryResultServlet?studentId=${studentUser.studentId}" role="button">显示所有预约结果</a>
         </div>
     </form>
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
-            <th>id</th>
+            <th>编号</th>
             <th>教师姓名</th>
             <th>所属学院</th>
             <th>专业</th>
@@ -63,7 +66,7 @@
                 <td>${teacher.major}</td>
                 <td>${teacher.clas}</td>
                 <td>${teacher.freetime}</td>
-                <td><a href="/TeacherAppointmentSystem_war_exploded/applicationServlet?id=${teacher.id}&name=${teacher.name}" class="btn btn-primary btn-sm active" role="button">预约</a></td>
+                <td><a href="/TeacherAppointmentSystem_war_exploded/applicationServlet?id=${teacher.id}&name=${teacher.name}&studentId=${studentUser.studentId}" class="btn btn-primary btn-sm active" role="button">预约</a></td>
             </tr>
         </c:forEach>
     </table>
@@ -72,36 +75,36 @@
             <ul class="pagination pagination-lg">
                 <c:if test="${page.currentPage == 1}">
                     <li class="disabled">
-                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Previous">
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}&studentId=${studentUser.studentId}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${page.currentPage != 1}">
                     <li>
-                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage - 1}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Previous">
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage - 1}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}&studentId=${studentUser.studentId}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                 </c:if>
                 <c:forEach begin="1" end="${page.totalPage}" var="i">
                     <c:if test="${page.currentPage == i}">
-                         <li class="active"><a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}">${i}</a></li>
+                         <li class="active"><a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}&studentId=${studentUser.studentId}">${i}</a></li>
                     </c:if>
                     <c:if test="${page.currentPage!= i}">
-                         <li><a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}">${i}</a></li>
+                         <li><a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${i}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}&studentId=${studentUser.studentId}">${i}</a></li>
                     </c:if>
                 </c:forEach>
                 <c:if test="${page.currentPage == page.totalPage}">
                     <li class="disabled">
-                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Next">
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}&studentId=${studentUser.studentId}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${page.currentPage != page.totalPage}">
                     <li>
-                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage + 1}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}" aria-label="Next">
+                        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=${page.currentPage + 1}&rows=5&name=${condition.name[0]}&college=${condition.college[0]}&studentId=${studentUser.studentId}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

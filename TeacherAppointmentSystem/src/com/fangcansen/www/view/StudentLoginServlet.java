@@ -38,7 +38,8 @@ public class StudentLoginServlet extends HttpServlet {
         }
         //5,判断密码是否输入正确
         if(studentUser.getPassword().equals(password)){
-            response.sendRedirect("/TeacherAppointmentSystem_war_exploded/queryteacher.jsp");
+            request.setAttribute("studentUser",studentUser);
+            request.getRequestDispatcher("/queryteacher.jsp").forward(request,response);
         }else {
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write("密码不正确，请重新输入");

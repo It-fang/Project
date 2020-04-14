@@ -67,4 +67,17 @@ public class TeacherUserService {
         page.setList(list);
         return page;
     }
+
+
+    public Teacher query(String _id) throws SQLException {
+        TeacherDao teacherDao = new TeacherDao();
+        int id = Integer.parseInt(_id);
+        Teacher teacher = teacherDao.get(id);
+        return teacher;
+    }
+
+    public void update(Teacher teacher) throws SQLException {
+        TeacherDao teacherDao = new TeacherDao();
+        teacherDao.update(teacher);
+    }
 }
