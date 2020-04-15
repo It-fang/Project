@@ -45,11 +45,11 @@ public class QueryTeacherByPageServlet extends HttpServlet {
         //4,封装studentUser对象
         StudentUser studentUser = new StudentUser();
         studentUser.setStudentId(studentId);
-        //4,将Page存入request域中
+        //5,将Page存入request域中
         request.setAttribute("page",page);
         request.setAttribute("condition",condition);
         request.setAttribute("studentUser",studentUser);
-        //5,转发Page到queryteacher.jsp
+        //6,转发Page到queryteacher.jsp
         request.getRequestDispatcher("/queryteacher.jsp").forward(request,response);
     }
 

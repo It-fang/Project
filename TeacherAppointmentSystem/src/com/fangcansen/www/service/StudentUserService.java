@@ -6,6 +6,7 @@ import com.fangcansen.www.po.Student;
 import com.fangcansen.www.po.StudentUser;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author it-fang
@@ -32,5 +33,34 @@ public class StudentUserService {
     public void registerStudentUser(StudentUser studentUser) throws SQLException {
         StudentUserDao studentUserDao = new StudentUserDao();
         studentUserDao.add(studentUser);
+    }
+
+    /**
+     *
+     * @param studentNumber
+     * @return
+     * @throws SQLException
+     */
+    public Student get(String studentNumber) throws SQLException {
+        StudentDao studentDao = new StudentDao();
+        Student student = studentDao.get(studentNumber);
+        return student;
+    }
+
+    public List<StudentUser> queryAll() throws SQLException {
+        StudentUserDao studentUserDao = new StudentUserDao();
+        List<StudentUser> studentUsers = studentUserDao.queryAll();
+        return studentUsers;
+
+    }
+
+    public void add(StudentUser studentUser) throws SQLException {
+        StudentUserDao studentUserDao = new StudentUserDao();
+        studentUserDao.add2(studentUser);
+    }
+
+    public void delete(int studentId) throws SQLException {
+        StudentUserDao studentUserDao = new StudentUserDao();
+        studentUserDao.delete(studentId);
     }
 }

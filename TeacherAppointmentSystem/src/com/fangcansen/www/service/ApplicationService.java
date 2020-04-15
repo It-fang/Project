@@ -53,14 +53,19 @@ public class ApplicationService {
         applicationDao.delete(studentNumber,teacherId);
     }
 
-    public Student get(String studentNumber) throws SQLException {
-        StudentDao studentDao = new StudentDao();
-        Student student = studentDao.get(studentNumber);
-        return student;
-    }
+
 
     public void update(int teacherId, String studentNumber, String ifAgree) throws SQLException {
         ApplicationDao applicationDao = new ApplicationDao();
         applicationDao.update(teacherId,studentNumber,ifAgree);
+    }
+
+    public void agreeSelect(int teacherId, String[] studentNumbers) throws SQLException {
+        if (studentNumbers != null && studentNumbers.length>0 ){
+            for (String studentNumber:studentNumbers){
+                ApplicationDao applicationDao = new ApplicationDao();
+                applicationDao.update(teacherId,studentNumber);
+            }
+        }
     }
 }

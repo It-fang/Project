@@ -29,30 +29,28 @@
 </head>
 <body>
 <div class="container">
-    <h3><p class="text-center">预约申请结果列表</p></h3>
-    <div style="float:right; margin: 5px;">
-        <a class="btn btn-success" href="/TeacherAppointmentSystem_war_exploded/queryResultServlet?studentId=${studentUser.studentId}" role="button">显示所有预约申请结果</a>
-    </div>
+    <h3><p class="text-center">用户注册申请列表</p></h3>
     <div style="float: left; margin: 5px">
-        <a href="/TeacherAppointmentSystem_war_exploded/queryTeacherByPageServlet?currentPage=1&rows=5&studentId=${studentUser.studentId}" class="btn btn-primary active" role="button">返回</a>
+        <a href="/TeacherAppointmentSystem_war_exploded/teacherregister.html" class="btn btn-primary active" role="button">注册教师用户</a>
+    </div>
+    <div style="float:right; margin: 5px;">
+        <a class="btn btn-lg btn-success" href="/TeacherAppointmentSystem_war_exploded/queryRegisterApplicationServlet" role="button">显示所有注册申请</a>
     </div>
     <table border="1" class="table table-bordered table-hover">
         <tr class="success">
             <th>编号</th>
-            <th>教师姓名</th>
-            <th>学生姓名</th>
-            <th>学生学号</th>
-            <th>申请时间</th>
-            <th>申请结果</th>
+            <th>注册用户昵称</th>
+            <th>注册用户密码</th>
+            <th>操作</th>
         </tr>
-        <c:forEach items="${applications}" var="application" varStatus="s">
+        <c:forEach items="${studentUsers}" var="studentUser" varStatus="s">
             <tr>
                 <td>${s.count}</td>
-                <td>${application.teacherName}</td>
-                <td>${application.studentName}</td>
-                <td>${application.studentNumber}</td>
-                <td>${application.applyTime}</td>
-                <td>${application.ifAgree}</td>
+                <td>${studentUser.username}</td>
+                <td>${studentUser.password}</td>
+                <td>
+                    <p><a href="/TeacherAppointmentSystem_war_exploded/agreeRegisterServlet?username=${studentUser.username}&password=${studentUser.password}&studentId=${studentUser.studentId}" class="btn btn-primary btn-xs active" role="button">同意注册</a></p>
+                </td>
             </tr>
         </c:forEach>
     </table>

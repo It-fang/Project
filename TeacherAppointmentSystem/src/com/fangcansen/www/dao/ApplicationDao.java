@@ -104,7 +104,20 @@ public class ApplicationDao {
         preparedStatement.execute();
         JdbcUtil.close(preparedStatement,conn);
     }
-
+    public void update(int teacherId, String studentNumber) throws SQLException {
+        Connection conn = JdbcUtil.getConnection();
+        String sql = "" +
+                "update application " +
+                "set " +
+                "ifagree = ?" +
+                "where teacher_id = ? and student_number = ?";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1,"同意");
+        preparedStatement.setInt(2,teacherId);
+        preparedStatement.setString(3,studentNumber);
+        preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
+    }
     /**
      *
      * @param _teacherId
@@ -126,7 +139,7 @@ public class ApplicationDao {
             application.setId(resultSet.getInt("id"));
             application.setTeacherId(resultSet.getInt("teacher_id"));
             application.setTeacherName(resultSet.getString("teacher_name"));
-            application.setTeacherId(resultSet.getInt("student_id"));
+            application.setStudentId(resultSet.getInt("student_id"));
             application.setStudentName(resultSet.getString("student_name"));
             application.setStudentNumber(resultSet.getString("student_number"));
             application.setApplyTime(resultSet.getString("applytime"));

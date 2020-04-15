@@ -34,12 +34,11 @@ public class AdminLoginServlet extends HttpServlet {
             response.getWriter().write("用户不存在");
         }
         if(admin.getPassword().equals(password)){
-            response.sendRedirect("/TeacherAppointmentSystem_war_exploded/teacherregister.html");
+            response.sendRedirect("/TeacherAppointmentSystem_war_exploded/registerapplication.jsp");
         }else{
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write("密码不正确，请重新输入");
         }
-
     }
 
     @Override

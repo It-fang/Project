@@ -23,6 +23,19 @@ public class StudentUserDao {
     public void add(StudentUser studentUser) throws SQLException {
         Connection conn = JdbcUtil.getConnection();
         String sql = "" +
+                "insert into registerapplication " +
+                "(username,password,student_id)   " +
+                "value (?,?,?)";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1,studentUser.getUsername());
+        preparedStatement.setString(2,studentUser.getPassword());
+        preparedStatement.setInt(3,studentUser.getStudentId());
+        preparedStatement.execute();
+        JdbcUtil.close(preparedStatement,conn);
+    }
+    public void add2(StudentUser studentUser) throws SQLException {
+        Connection conn = JdbcUtil.getConnection();
+        String sql = "" +
                 "insert into studentuser " +
                 "(username,password,student_id)   " +
                 "value (?,?,?)";
@@ -36,16 +49,16 @@ public class StudentUserDao {
 
     /**
      * 按照学生id在数据库中删除学生用户对象信息
-     * @param id
+     * @param studentId
      * @throws SQLException
      */
-    public void delete(Integer id) throws SQLException {
+    public void delete(Integer studentId) throws SQLException {
         Connection conn = JdbcUtil.getConnection();
         String sql = "" +
-                "delete from studentuser " +
-                "where id = ?";
+                "delete from registerapplication " +
+                "where student_id = ?";
         PreparedStatement preparedStatement =conn.prepareStatement(sql);
-        preparedStatement.setInt(1,id);
+        preparedStatement.setInt(1,studentId);
         preparedStatement.execute();
         JdbcUtil.close(preparedStatement,conn);
     }
@@ -71,7 +84,7 @@ public class StudentUserDao {
     }
 
     /**
-     * 按id从小到大返回所有学生用户对象信息
+     * 返回所有学生用户对象信息
      * @return List<StudentUser></>
      * @throws SQLException
      */
@@ -79,8 +92,7 @@ public class StudentUserDao {
     public List<StudentUser> queryAll() throws SQLException {
         Connection conn = JdbcUtil.getConnection();
         String sql = "" +
-                "select * from studentuser " +
-                "order by id";
+                "select * from registerapplication ";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<StudentUser> studentUsers = new ArrayList<StudentUser>();
@@ -121,5 +133,6 @@ public class StudentUserDao {
         JdbcUtil.close(resultSet,preparedStatement,conn);
         return studentUser;
     }
+
 
 }

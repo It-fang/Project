@@ -37,9 +37,9 @@ public class RegisterStudentUserServlet extends HttpServlet {
         student.setClas(clas);
         //4,调用StudentUserService的registerStudent方法获得studentID
         StudentUserService studentUserService = new StudentUserService();
-        int studentID = 0;
+        int studentid = 0;
         try {
-            studentID = studentUserService.registerStudent(student);
+            studentid = studentUserService.registerStudent(student);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class RegisterStudentUserServlet extends HttpServlet {
         StudentUser studentUser = new StudentUser();
         studentUser.setUsername(username);
         studentUser.setPassword(password);
-        studentUser.setStudentId(studentID);
+        studentUser.setStudentId(studentid);
         //6,调用StudentUserService的registerStudentUser的方法完成注册
         try {
             studentUserService.registerStudentUser(studentUser);
