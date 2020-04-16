@@ -53,7 +53,7 @@ public class RegisterTeacherUserServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("/TeacherAppointmentSystem_war_exploded/teacherauto.html");
+        response.sendRedirect("/TeacherAppointmentSystem_war_exploded/teac  herauto.html");
     }
 
 
