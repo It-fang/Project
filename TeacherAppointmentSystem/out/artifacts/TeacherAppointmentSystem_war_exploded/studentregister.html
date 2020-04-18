@@ -36,7 +36,6 @@
         .rg_center{
             float: left;
             width: 450px;
-
         }
         .rg_right{
             float: right;
@@ -68,6 +67,17 @@
         }
     </style>
 
+    <script language="JavaScript">
+        function checkLogin() {
+            if((form.username != "")){
+
+            }
+            else {
+                alert("用户名不能为空");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="rg_layout">
@@ -76,10 +86,9 @@
         <p>USER REGISTER</p>
     </div>
 
-
     <div class="rg_center">
         <div class="rg_form">
-            <form action="/TeacherAppointmentSystem_war_exploded/registerStudentUserServlet"  id="form" method="post">
+            <form action="/TeacherAppointmentSystem_war_exploded/registerStudentUserServlet" name="form" id="form" method="post" onsubmit="return checkLogin()">
                 <table >
                     <tr>
                         <td class="td_left"><label for="username">用户名</label></td>
@@ -109,7 +118,8 @@
                         <td class="td_right">
                             <input id="college" list="colleges" name="college" placeholder="请选择学院">
                             <datalist id="colleges">
-                                <option value="computer">
+                                <option value="计算机学院">
+                                <option value="自动化学院">
                             </datalist>
                         </td>
                     </tr>
@@ -118,7 +128,8 @@
                         <td class="td_right">
                             <input id="major" list="majors" name="major" placeholder="请选择专业">
                             <datalist id="majors">
-                                <option value="network">
+                                <option value="网络工程">
+                                <option value="物联网工程">
                             </datalist>
                         </td>
                     </tr>
@@ -127,7 +138,7 @@
                         <td class="td_right">
                             <input id="class" list="classs" name="clas" placeholder="请选择班级">
                             <datalist id="classs">
-                                <option value="one">
+                                <option value="1班">
                             </datalist>
                         </td>
                     </tr>

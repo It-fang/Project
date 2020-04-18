@@ -49,8 +49,10 @@
                 <td>${studentUser.username}</td>
                 <td>${studentUser.password}</td>
                 <td>
-                    <p><a href="/TeacherAppointmentSystem_war_exploded/agreeRegisterServlet?username=${studentUser.username}&password=${studentUser.password}&studentId=${studentUser.studentId}" class="btn btn-primary btn-xs active" role="button">同意</a></p>
-                    <p><a href="/TeacherAppointmentSystem_war_exploded/refuseRegisterServlet?studentId=${studentUser.studentId}">拒绝</a></p>
+                    <p>
+                        <a href="/TeacherAppointmentSystem_war_exploded/agreeRegisterServlet?username=${studentUser.username}&password=${studentUser.password}&studentId=${studentUser.studentId}" class="btn btn-primary btn-xs active" role="button">同意</a>
+                        <a href="/TeacherAppointmentSystem_war_exploded/refuseRegisterServlet?studentId=${studentUser.studentId}" class="btn btn-primary btn-xs active" role="button" > 拒绝</a>
+                    </p>
                 </td>
             </tr>
         </c:forEach>

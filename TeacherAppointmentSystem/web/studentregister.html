@@ -36,7 +36,6 @@
         .rg_center{
             float: left;
             width: 450px;
-
         }
         .rg_right{
             float: right;
@@ -68,6 +67,63 @@
         }
     </style>
 
+    <script language="JavaScript">
+        window.onload = function () {
+            document.getElementById("form").onsubmit = function () {
+                return checkUsername()&&checkPassword()&&checkName()&&checkNumber()&&checkCollege()&&checkMajor()&&checkClas();
+            }
+            document.getElementById("username").onblur = checkUsername;
+            document.getElementById("password").onblur = checkPassword;
+            document.getElementById("name").onblur = checkName;
+            document.getElementById("number").onblur = checkNumber;
+            document.getElementById("college").onblur = checkCollege;
+            document.getElementById("major").onblur = checkMajor;
+            document.getElementById("class").onblur = checkClass;
+        }
+        function checkUsername() {
+            var username = document.getElementById("username").value;
+            if (username == ""){
+                alert("用户名不能为空");
+            }
+        }
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            if (password == ""){
+                alert("密码不能为空");
+            }
+        }
+        function checkName() {
+            var name = document.getElementById("name").value;
+            if (name == ""){
+                alert("用户名不能为空");
+            }
+        }
+        function checkNumber() {
+            var number = document.getElementById("number").value;
+            if (number == ""){
+                alert("学号不能为空");
+            }
+        }
+        function checkCollege() {
+            var college = document.getElementById("college").value;
+            if (college == ""){
+                alert("学院不能为空");
+            }
+        }
+        function checkMajor() {
+            var major = document.getElementById("major").value;
+            if (major == ""){
+                alert("专业不能为空");
+            }
+        }
+        function checkClass() {
+            var clas = document.getElementById("class").value;
+            if (clas == ""){
+                alert("班级不能为空");
+            }
+        }
+    </script>
+
 </head>
 <body>
 <div class="rg_layout">
@@ -76,10 +132,9 @@
         <p>USER REGISTER</p>
     </div>
 
-
     <div class="rg_center">
         <div class="rg_form">
-            <form action="/TeacherAppointmentSystem_war_exploded/registerStudentUserServlet"  id="form" method="post">
+            <form action="/TeacherAppointmentSystem_war_exploded/registerStudentUserServlet" name="form" id="form" method="post" >
                 <table >
                     <tr>
                         <td class="td_left"><label for="username">用户名</label></td>
@@ -96,7 +151,7 @@
                     <tr>
                         <td class="td_left"><label>性别</label></td>
                         <td class="td_right">
-                            <input type="radio" name="sex" value="男"> 男
+                            <input type="radio" name="sex" value="男" checked> 男
                             <input type="radio" name="sex" value="女"> 女
                         </td>
                     </tr>
@@ -109,7 +164,8 @@
                         <td class="td_right">
                             <input id="college" list="colleges" name="college" placeholder="请选择学院">
                             <datalist id="colleges">
-                                <option value="computer">
+                                <option value="计算机学院">
+                                <option value="自动化学院">
                             </datalist>
                         </td>
                     </tr>
@@ -118,7 +174,8 @@
                         <td class="td_right">
                             <input id="major" list="majors" name="major" placeholder="请选择专业">
                             <datalist id="majors">
-                                <option value="network">
+                                <option value="网络工程">
+                                <option value="物联网工程">
                             </datalist>
                         </td>
                     </tr>
@@ -127,7 +184,7 @@
                         <td class="td_right">
                             <input id="class" list="classs" name="clas" placeholder="请选择班级">
                             <datalist id="classs">
-                                <option value="one">
+                                <option value="1班">
                             </datalist>
                         </td>
                     </tr>
