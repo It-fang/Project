@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "RefuseRegisterServletServlet")
-public class RefuseRegisterServletServlet extends HttpServlet {
+@WebServlet(name = "refuseRegisterServlet",urlPatterns = "/refuseRegisterServlet")
+public class RefuseRegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1,设置编码

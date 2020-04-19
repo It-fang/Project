@@ -93,7 +93,7 @@
                 <td>${application.ifAgree}</td>
                 <td>
                     <p>
-                        <a href="/TeacherAppoint mentSystem_war_exploded/showServlet?id=${application.teacherId}&number=${application.studentNumber}" class="btn btn-primary btn-xs active" role="button">审批</a>
+                        <a href="/TeacherAppointmentSystem_war_exploded/showServlet?id=${application.teacherId}&number=${application.studentNumber}" class="btn btn-primary btn-xs active" role="button">审批</a>
                         <a href="javascript:deleteApplication('${application.teacherId}','${application.studentNumber}');" class="btn btn-primary btn-xs active" role="button">删除</a>
                     </p>
                 </td>

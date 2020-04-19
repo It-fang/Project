@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * @author it-fang
+ */
 @WebServlet(name = "registerTeacherUserServlet" ,urlPatterns = "/registerTeacherUserServlet")
 public class RegisterTeacherUserServlet extends HttpServlet {
     @Override
@@ -53,7 +56,7 @@ public class RegisterTeacherUserServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("/TeacherAppointmentSystem_war_exploded/teac  herauto.html");
+        response.sendRedirect("/TeacherAppointmentSystem_war_exploded/teacherauto.html");
     }
 
 

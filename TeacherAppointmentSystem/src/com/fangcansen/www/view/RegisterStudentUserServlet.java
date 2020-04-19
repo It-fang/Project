@@ -27,6 +27,11 @@ public class RegisterStudentUserServlet extends HttpServlet {
         String college = request.getParameter("college");
         String major = request.getParameter("major");
         String clas = request.getParameter("clas");
+        //3,判断获取到的参数是否为空
+        if ("".equals(username) || "".equals(password) || "".equals(name) || "".equals(sex) || "".equals(number) || "".equals(college) || "".equals(major) || "".equals(clas) ){
+            response.sendRedirect("/TeacherAppointmentSystem_war_exploded/studentregister.html");
+            return;
+        }
         //3,封装student对象
         Student student = new Student();
         student.setName(name);
